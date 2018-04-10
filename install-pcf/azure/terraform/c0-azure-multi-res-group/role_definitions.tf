@@ -41,20 +41,21 @@ resource "azurerm_role_definition" "network_deploy" {
 }
 
 resource "azurerm_role_assignment" "network_readonly_to_pcf_principal" {
-//  name               = "00000000-0000-0000-0000-000000000000"
+  name               = "00000000-0000-0000-0000-000000000000"
   scope              = "/subscriptions/${var.subscription_id}/resourceGroups/${azurerm_resource_group.network_resource_group.id}"
   role_definition_id = "${azurerm_role_definition.network_readonly.id}"
   principal_id       = "${var.pcf_service_principal_client_id}"
 }
 
 resource "azurerm_role_assignment" "network_deploy_to_pcf_principal" {
-//    name               = "00000000-0000-0000-0000-000000000000"
+  name               = "00000000-0000-0000-0000-000000000000"
   scope              = "/subscriptions/${var.subscription_id}"
   role_definition_id = "${azurerm_role_definition.network_deploy.id}"
   principal_id       = "${var.pcf_service_principal_client_id}"
 }
 
 resource "azurerm_role_assignment" "pcf_contributor_to_pcf_principal" {
+  role_definition_id = "00000000-0000-0000-0000-000000000000"
   scope                = "/subscriptions/${var.subscription_id}/resourceGroups/${azurerm_resource_group.pcf_resource_group.id}"
   role_definition_name = "Contributor"
   principal_id         = "${var.pcf_service_principal_client_id}"
