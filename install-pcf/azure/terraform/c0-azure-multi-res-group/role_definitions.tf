@@ -55,7 +55,9 @@ resource "azurerm_role_assignment" "network_deploy_to_pcf_principal" {
 }
 
 resource "azurerm_role_assignment" "pcf_contributor_to_pcf_principal" {
+  name               = "00000000-0000-0000-0000-000000000000"
+  role_definition_id   = "/subscriptions/${var.subscription_id}/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"  // Contributor
   scope                = "/subscriptions/${var.subscription_id}/resourceGroups/${azurerm_resource_group.pcf_resource_group.id}"
-  role_definition_name = "Contributor"
+//  role_definition_name = "Contributor"
   principal_id         = "${var.pcf_service_principal_client_id}"
 }
