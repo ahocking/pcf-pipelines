@@ -5,6 +5,9 @@ set -e
 AZURE_PCF_SERVICE_PRINCIPAL_CLIENT_ID=${AZURE_CLIENT_ID}
 
 if [[ ${AZURE_PCF_TERRAFORM_TEMPLATE} == "c0-azure-multi-res-group" ]]; then
+  echo "=============================================================================================="
+  echo "Deploying Multi Resource Groups"
+  echo "=============================================================================================="
 
   AZURE_CLIENT_ID=${AZURE_MULTI_RESGROUP_NETWORK_CLIENT_ID}
   AZURE_CLIENT_SECRET=${AZURE_MULTI_RESGROUP_NETWORK_CLIENT_SECRET}
