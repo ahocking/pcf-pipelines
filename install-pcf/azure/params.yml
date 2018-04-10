@@ -24,6 +24,8 @@ azure_account_name:
 # Required if Azure blob storage is used as external storage by ERT, which is determined by azure_account_name being not null. This setting is used to specify the container where the buildpacks will be stored. It is similar to the S3 bucket in AWS.
 azure_buildpacks_container:
 
+# If deploying to multiple resource groups, this is the ID of the service principal that OpsManager/PCF will use for BOSH when deploying PCF.  It should have Contributor access to the PCF/BOSH resource group
+# If deploying to a single resource group, this is the ID of the service principal that has Contributor access to the PCF resource group.
 azure_client_id: CHANGEME
 azure_client_secret: CHANGEME
 

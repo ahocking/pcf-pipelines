@@ -2,6 +2,8 @@
 set -e
 
 
+AZURE_PCF_SERVICE_PRINCIPAL_CLIENT_ID=${AZURE_CLIENT_ID}
+
 if [[ ${AZURE_PCF_TERRAFORM_TEMPLATE} == "c0-azure-multi-res-group" ]]; then
 
   AZURE_CLIENT_ID=${AZURE_MULTI_RESGROUP_NETWORK_CLIENT_ID}
@@ -51,6 +53,7 @@ terraform plan \
   -var "client_secret=${AZURE_CLIENT_SECRET}" \
   -var "tenant_id=${AZURE_TENANT_ID}" \
   -var "location=${AZURE_REGION}" \
+  -var "pcf_service_principal_client_id=${AZURE_PCF_SERVICE_PRINCIPAL_CLIENT_ID}" \
   -var "env_name=${AZURE_TERRAFORM_PREFIX}" \
   -var "env_short_name=${ENV_SHORT_NAME}" \
   -var "azure_terraform_vnet_cidr=${AZURE_TERRAFORM_VNET_CIDR}" \

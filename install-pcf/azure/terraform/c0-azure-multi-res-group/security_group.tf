@@ -6,7 +6,7 @@
 resource "azurerm_network_security_group" "ops_manager_security_group" {
   name                = "ops-manager-security-group"
   location            = "${var.location}"
-  resource_group_name = "${var.azure_multi_resgroup_pcf}"
+  resource_group_name = "${azurerm_resource_group.pcf_resource_group.name}"
 
   security_rule {
     name                       = "ssh"
@@ -48,7 +48,7 @@ resource "azurerm_network_security_group" "ops_manager_security_group" {
 resource "azurerm_network_security_group" "default_security_group" {
   name                = "pcf-default-security-group"
   location            = "${var.location}"
-  resource_group_name = "${var.azure_multi_resgroup_pcf}"
+  resource_group_name = "${azurerm_resource_group.pcf_resource_group.name}"
 
   security_rule {
     name                       = "internal-anything"

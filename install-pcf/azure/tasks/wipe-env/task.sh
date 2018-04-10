@@ -44,6 +44,7 @@ function delete-infrastructure() {
     -var "client_id=${AZURE_CLIENT_ID}" \
     -var "client_secret=${AZURE_CLIENT_SECRET}" \
     -var "tenant_id=${AZURE_TENANT_ID}" \
+    -var "pcf_service_principal_client_id=dontcare" \
     -var "location=dontcare" \
     -var "env_name=dontcare" \
     -var "env_short_name=dontcare" \

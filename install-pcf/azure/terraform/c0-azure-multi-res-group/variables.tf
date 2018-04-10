@@ -15,6 +15,8 @@ variable "client_secret" {}
 variable "tenant_id" {}
 variable "location" {}
 
+variable "pcf_service_principal_client_id" {}
+
 variable "pcf_ert_domain" {}
 variable "apps_domain" {}
 variable "system_domain" {}

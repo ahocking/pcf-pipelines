@@ -6,7 +6,7 @@
 resource "azurerm_lb" "mysql" {
   name                = "${var.env_name}-mysql-lb"
   location            = "${var.location}"
-  resource_group_name = "${var.azure_multi_resgroup_pcf}"
+  resource_group_name = "${azurerm_resource_group.pcf_resource_group.name}"
 
   frontend_ip_configuration = {
     name      = "frontendip"
@@ -19,14 +19,14 @@ resource "azurerm_lb" "mysql" {
 resource "azurerm_lb_backend_address_pool" "mysql-backend-pool" {
   name                = "mysql-backend-pool"
   location            = "${var.location}"
-  resource_group_name = "${var.azure_multi_resgroup_pcf}"
+  resource_group_name = "${azurerm_resource_group.pcf_resource_group.name}"
   loadbalancer_id     = "${azurerm_lb.mysql.id}"
 }
 
 resource "azurerm_lb_probe" "mysql-probe" {
   name                = "mysql-probe"
   location            = "${var.location}"
-  resource_group_name = "${var.azure_multi_resgroup_pcf}"
+  resource_group_name = "${azurerm_resource_group.pcf_resource_group.name}"
   loadbalancer_id     = "${azurerm_lb.mysql.id}"
   protocol            = "TCP"
   port                = 1936
@@ -35,7 +35,7 @@ resource "azurerm_lb_probe" "mysql-probe" {
 resource "azurerm_lb_rule" "mysql-rule" {
   name                = "mysql-rule"
   location            = "${var.location}"
-  resource_group_name = "${var.azure_multi_resgroup_pcf}"
+  resource_group_name = "${azurerm_resource_group.pcf_resource_group.name}"
   loadbalancer_id     = "${azurerm_lb.mysql.id}"
 
   frontend_ip_configuration_name = "frontendip"
