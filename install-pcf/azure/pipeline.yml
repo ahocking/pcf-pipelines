@@ -47,8 +47,8 @@ resources:
 - name: terraform-state
   type: azure-blobstore
   source:
-    storage_account_name: {{terraform_azure_account_name}}
-    storage_account_key: {{terraform_azure_access_key}}
+    storage_account_name: {{terraform_azure_storage_account_name}}
+    storage_account_key: {{terraform_azure_storage_access_key}}
     container: {{azure_storage_container_name}}
     versioned_file: terraform.tfstate
 
@@ -87,8 +87,8 @@ jobs:
   - get: pcf-pipelines
   - task: create-terraform-state
     params:
-      AZURE_STORAGE_ACCOUNT: {{terraform_azure_account_name}}
-      AZURE_STORAGE_KEY: {{terraform_azure_access_key}}
+      AZURE_STORAGE_ACCOUNT: {{terraform_azure_storage_account_name}}
+      AZURE_STORAGE_KEY: {{terraform_azure_storage_access_key}}
       CONTAINER: {{azure_storage_container_name}}
     file: pcf-pipelines/install-pcf/azure/tasks/create-initial-terraform-state/task.yml
 
@@ -195,6 +195,7 @@ jobs:
       AZURE_TERRAFORM_SUBNET_DYNAMIC_SERVICES_CIDR: {{azure_terraform_subnet_dynamic_services_cidr}}
       AZURE_TERRAFORM_OPSMAN_PRIV_IP: {{azure_opsman_priv_ip}}
       AZURE_TERRAFORM_PRIV_IP_MYSQL_LB: {{priv_ip_mysql_lb}}
+      AZURE_STORAGE_ACCOUNT_NAME: {{azure_storage_account_name}}
       PCF_OPSMAN_DISK_SIZE_IN_GB: {{pcf_opsman_disk_size_in_gb}}
 
 ##############################
@@ -240,6 +241,7 @@ jobs:
     - get: pcf-pipelines
     - get: pivnet-opsmgr
       passed: [config-opsman-auth]
+      trigger: true
       params:
         globs: []
 
@@ -431,21 +433,7 @@ jobs:
       DISABLE_INSECURE_COOKIES: {{disable_insecure_cookies}}
       ROUTER_STATIC_IPS: {{router_static_ips}}
       ROUTER_REQUEST_TIMEOUT_IN_SEC: {{router_request_timeout_in_seconds}}
-      GARDEN_NETWORK_MTU: {{garden_network_mtu}}
       MYSQL_MONITOR_EMAIL: {{mysql_monitor_recipient_email}}
-      MYSQL_BACKUPS: {{mysql_backups}}
-      MYSQL_BACKUPS_SCP_SERVER: {{mysql_backups_scp_server}}
-      MYSQL_BACKUPS_SCP_PORT: {{mysql_backups_scp_port}}
-      MYSQL_BACKUPS_SCP_USER: {{mysql_backups_scp_user}}
-      MYSQL_BACKUPS_SCP_KEY: {{mysql_backups_scp_key}}
-      MYSQL_BACKUPS_SCP_DESTINATION: {{mysql_backups_scp_destination}}
-      MYSQL_BACKUPS_SCP_CRON_SCHEDULE: {{mysql_backups_scp_cron_schedule}}
-      MYSQL_BACKUPS_S3_ENDPOINT_URL: {{mysql_backups_s3_endpoint_url}}
-      MYSQL_BACKUPS_S3_BUCKET_NAME: {{mysql_backups_s3_bucket_name}}
-      MYSQL_BACKUPS_S3_BUCKET_PATH: {{mysql_backups_s3_bucket_path}}
-      MYSQL_BACKUPS_S3_ACCESS_KEY_ID: {{mysql_backups_s3_access_key_id}}
-      MYSQL_BACKUPS_S3_SECRET_ACCESS_KEY: {{mysql_backups_s3_secret_access_key}}
-      MYSQL_BACKUPS_S3_CRON_SCHEDULE: {{mysql_backups_s3_cron_schedule}}
       ALLOW_APP_SSH_ACCESS: {{allow_app_ssh_access}}
       TCP_ROUTER_STATIC_IPS: {{tcp_router_static_ips}}
       SSH_STATIC_IPS: {{ssh_static_ips}}
